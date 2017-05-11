@@ -3,12 +3,12 @@ package com.saagie.conference.vavr.functions;
 
 import com.saagie.conference.vavr.domain.Address;
 import com.saagie.conference.vavr.domain.User;
-import javaslang.Function0;
-import javaslang.Function1;
-import javaslang.Function4;
-import javaslang.Tuple2;
-import javaslang.collection.Map;
-import javaslang.control.Option;
+import io.vavr.Function0;
+import io.vavr.Function1;
+import io.vavr.Function4;
+import io.vavr.Tuple2;
+import io.vavr.collection.Map;
+import io.vavr.control.Option;
 
 import static com.saagie.conference.vavr.domain.User.generateUserList;
 

@@ -1,7 +1,8 @@
 package com.saagie.conference.vavr.collections;
 
 
-import javaslang.collection.List;
+
+import io.vavr.collection.List;
 import org.junit.Before;
 import org.junit.Test;
 

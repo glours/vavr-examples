@@ -2,8 +2,9 @@ package com.saagie.conference.vavr.values;
 
 
 import com.saagie.conference.vavr.domain.User;
-import javaslang.collection.List;
-import javaslang.control.Validation;
+import io.vavr.collection.List;
+import io.vavr.collection.Seq;
+import io.vavr.control.Validation;
 
 import java.util.regex.Pattern;
 
@@ -12,14 +13,13 @@ public class UserValidation {
     private static final String VALID_USERNAME = "[A-Za-z0-9 ]";
     private static final Pattern VALIDE_PASSWORD = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
 
-    public static Validation<List<String>, User> validate(User user) {
+    public static Validation<Seq<String>, User> validate(User user) {
         return Validation.combine(
                     validateUserName(user.getUserName()),
                     validateEmail(user.getEmail()),
                     validatePassword(user.getPassword()))
                 .combine(AddressValidation.validate(user.getAddress()))
-                .ap((userName, email, password, zipCode) ->
-                        new User(userName, user.getFirstName(), user.getLastName(), email, password, user.getAddress())
+                .ap((userName, email, password, zipCode) -> new User(userName, user.getFirstName(), user.getLastName(), email, password, user.getAddress())
                 );
     }
 

@@ -2,7 +2,8 @@ package com.saagie.conference.vavr.values;
 
 
 import com.saagie.conference.vavr.domain.Address;
-import javaslang.control.Validation;
+import io.vavr.control.Validation;
+
 
 public class AddressValidation {
 

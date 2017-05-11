@@ -2,22 +2,21 @@ package com.saagie.conference.vavr.values;
 
 import com.saagie.conference.vavr.domain.Address;
 import com.saagie.conference.vavr.domain.User;
-import javaslang.Tuple2;
-import javaslang.collection.List;
-import javaslang.collection.Map;
-import javaslang.control.Either;
-import javaslang.control.Option;
-import javaslang.control.Try;
-import javaslang.control.Validation;
+import io.vavr.Tuple2;
+import io.vavr.collection.List;
+import io.vavr.collection.Map;
+import io.vavr.collection.Seq;
+import io.vavr.control.Either;
+import io.vavr.control.Option;
+import io.vavr.control.Try;
+import io.vavr.control.Validation;
 
 import java.util.Optional;
 
 import static com.saagie.conference.vavr.domain.User.generateUserList;
-import static javaslang.API.Case;
-import static javaslang.Patterns.Invalid;
-import static javaslang.Patterns.Valid;
-import static javaslang.API.$;
-import static javaslang.API.Match;
+import static io.vavr.API.*;
+import static io.vavr.Patterns.$Invalid;
+import static io.vavr.Patterns.$Valid;
 
 public class ValuesExamples {
 
@@ -53,7 +52,7 @@ public class ValuesExamples {
 
     }
 
-    public Validation<List<String>, User> validateUser(Option<User> user) {
+    public Validation<Seq<String>, User> validateUser(Option<User> user) {
         return user.map(User::validate).getOrElse(Validation.invalid(List.of("Invalid user")));
     }
 
@@ -61,8 +60,8 @@ public class ValuesExamples {
         List<User> users = this.usersVavr.map(tuple -> tuple._2).toList();
         return users.map(user ->
                 Match(validateUser(Option.of(user))).of(
-                  Case(Valid($()), validUser -> Either.right(validUser.getAddress())),
-                    Case(Invalid($()), errorList -> Either.left(user.getAddress()))
+                  Case($Valid($()), validUser -> Either.right(validUser.getAddress())),
+                    Case($Invalid($()), errorList -> Either.left(user.getAddress()))
                 )
         );
     }

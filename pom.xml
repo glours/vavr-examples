@@ -14,7 +14,7 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <!-- Libs -->
-    <lib.javaslang.version>2.0.6</lib.javaslang.version>
+    <lib.vavr.version>0.9.0</lib.vavr.version>
     <!-- Tests -->
     <test.junit.version>4.12</test.junit.version>
     <test.assertj-core.version>3.4.1</test.assertj-core.version>
@@ -24,9 +24,9 @@
 
     <!-- Libs -->
     <dependency>
-      <groupId>io.javaslang</groupId>
-      <artifactId>javaslang</artifactId>
-      <version>${lib.javaslang.version}</version>
+      <groupId>io.vavr</groupId>
+      <artifactId>vavr</artifactId>
+      <version>${lib.vavr.version}</version>
     </dependency>
 
     <!-- Tests -->
@@ -43,9 +43,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>io.javaslang</groupId>
-      <artifactId>javaslang-test</artifactId>
-      <version>${lib.javaslang.version}</version>
+      <groupId>io.vavr</groupId>
+      <artifactId>vavr-test</artifactId>
+      <version>${lib.vavr.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

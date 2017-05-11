@@ -1,8 +1,8 @@
 package com.saagie.conference.vavr.functions;
 
 
-import javaslang.collection.List;
-import javaslang.control.Option;
+import io.vavr.collection.List;
+import io.vavr.control.Option;
 import org.junit.Before;
 import org.junit.Test;
 

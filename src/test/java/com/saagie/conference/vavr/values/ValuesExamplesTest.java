@@ -2,10 +2,11 @@ package com.saagie.conference.vavr.values;
 
 import com.saagie.conference.vavr.domain.Address;
 import com.saagie.conference.vavr.domain.User;
-import javaslang.collection.List;
-import javaslang.control.Either;
-import javaslang.control.Option;
-import javaslang.control.Validation;
+import io.vavr.collection.List;
+import io.vavr.collection.Seq;
+import io.vavr.control.Either;
+import io.vavr.control.Option;
+import io.vavr.control.Validation;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -93,7 +94,7 @@ public class ValuesExamplesTest {
         User invalidUser = new User("John2Doe!", "John", "Doe", "john.doe@.saagie.com",
                 "badPass", null);
 
-        Validation<List<String>, User>  validation = this.examples.validateUser(Option.of(invalidUser));
+        Validation<Seq<String>, User> validation = this.examples.validateUser(Option.of(invalidUser));
         assertThat(validation.isInvalid());
         assertThat(validation.getError())
                 .contains("Invalid email", "Invalid password", "Empty address", "userName contains invalid characters");

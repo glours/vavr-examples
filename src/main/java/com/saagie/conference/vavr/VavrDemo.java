@@ -1,16 +1,17 @@
 package com.saagie.conference.vavr;
 
 
-import javaslang.API;
-import javaslang.Function0;
-import javaslang.Function1;
-import javaslang.Function2;
-import javaslang.collection.Array;
-import javaslang.control.Option;
+import io.vavr.API;
+import io.vavr.Function0;
+import io.vavr.Function1;
+import io.vavr.Function2;
+import io.vavr.collection.Array;
+import io.vavr.control.Option;
 
-import static javaslang.API.$;
-import static javaslang.API.Case;
-import static javaslang.Predicates.isIn;
+import static io.vavr.API.$;
+import static io.vavr.API.Case;
+import static io.vavr.Predicates.isIn;
+
 
 public class VavrDemo
 {
@@ -18,8 +19,8 @@ public class VavrDemo
     {
         Option<String> arg = Array.of(args).headOption();
         String commandDescription = API.Match(arg.getOrElse("")).of(
-                Case(isIn("-h", "--help"), helpDocumentation.apply()),
-                Case(isIn("-v", "--version"), versionDocumentation.apply(Option.none()) ),
+                Case($(isIn("-h", "--help")), helpDocumentation.apply()),
+                Case($(isIn("-v", "--version")), versionDocumentation.apply(Option.none()) ),
                 Case($(), invalidCommand.apply(helpDocumentation.apply(), arg))
         ).getOrElse("Error when parsing argument");
         System.out.println(commandDescription);

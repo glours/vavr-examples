@@ -2,9 +2,10 @@ package com.saagie.conference.vavr.domain;
 
 
 import com.saagie.conference.vavr.values.UserValidation;
-import javaslang.collection.List;
-import javaslang.control.Option;
-import javaslang.control.Validation;
+import io.vavr.collection.List;
+import io.vavr.collection.Seq;
+import io.vavr.control.Option;
+import io.vavr.control.Validation;
 
 public class User {
 
@@ -37,6 +38,11 @@ public class User {
 
     public Address getAddress() { return address; }
 
+    //Prefer this kind of validation
+    public Validation<Seq<String>, User> validate() {
+        return UserValidation.validate(this);
+    }
+
     public Option<Address> getAddressIfValid() throws IllegalArgumentException {
         return this.isAddressValid() ? Option.of(this.address) : Option.none();
     }
@@ -57,10 +63,6 @@ public class User {
         throw new IllegalArgumentException("Not a good address");
     }
 
-    //Prefer this kind of validation
-    public Validation<List<String>, User> validate() {
-        return UserValidation.validate(this);
-    }
 
     @Override
     public boolean equals(Object o) {

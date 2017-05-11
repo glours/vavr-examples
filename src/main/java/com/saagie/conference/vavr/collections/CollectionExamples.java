@@ -3,11 +3,11 @@ package com.saagie.conference.vavr.collections;
 
 import com.saagie.conference.vavr.domain.Address;
 import com.saagie.conference.vavr.domain.User;
-import javaslang.Tuple2;
-import javaslang.collection.List;
-import javaslang.collection.Map;
-import javaslang.collection.Stream;
-import javaslang.control.Try;
+import io.vavr.Tuple2;
+import io.vavr.collection.List;
+import io.vavr.collection.Map;
+import io.vavr.collection.Stream;
+import io.vavr.control.Try;
 
 import java.util.Collections;
 import java.util.stream.Collectors;
