@@ -26,7 +26,7 @@ public class VavrDemo
         System.out.println(commandDescription);
     }
 
-    private static Function0<Option<String>> usageDocumentation =  () -> Option.of("usage: VavrDemo [options] \n") ;
+    private static Function0<Option<String>> usageDocumentation =  () -> Option.of("usage: VavrDemo [options] \n-h, --help : Display command line help\n") ;
     private static Function1<Option<String>, Option<String>> versionDocumentation = previous -> previous.map(prev -> prev + "-v, --version : Display version Information");
     private static Function0<Option<String>> helpDocumentation = usageDocumentation.andThen(versionDocumentation);
     private static Function2<Option<String>, Option<String>, Option<String>> invalidCommand = (previous, arg) -> previous.map(prev -> "Unable to parse command line option : " + arg.getOrElse("") +"\n" + prev) ;

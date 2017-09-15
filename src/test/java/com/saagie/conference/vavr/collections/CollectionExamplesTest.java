@@ -2,10 +2,12 @@ package com.saagie.conference.vavr.collections;
 
 
 
+import com.saagie.conference.vavr.domain.User;
 import io.vavr.collection.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,6 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CollectionExamplesTest {
 
     private CollectionExamples examples;
+    private static final Predicate<User> NAME_END_WITH_EVEN_NUMBER = user -> Integer.parseInt(user.getLastName().substring(user.getLastName().lastIndexOf("lastName") + 8)) %2 == 0;
 
     @Before
     public void setUp() throws Exception {
@@ -52,6 +55,18 @@ public class CollectionExamplesTest {
     @Test
     public void should_filter_user_with_valid_address_vavr() throws Exception {
         assertThat(this.examples.filterUserWithValidAddressVavr())
+                .hasSize(10);
+    }
+
+    @Test
+    public void should_filter_user_with_predicate_jdk8() throws Exception{
+        assertThat(this.examples.filterUserWithPredicateJdk8(NAME_END_WITH_EVEN_NUMBER))
+                .hasSize(10);
+    }
+
+    @Test
+    public void should_filter_user_with_predicate_vavr() {
+        assertThat(this.examples.filterUserWithPredicateVavr(NAME_END_WITH_EVEN_NUMBER))
                 .hasSize(10);
     }
 
@@ -97,5 +112,21 @@ public class CollectionExamplesTest {
         assertThat(this.examples.filterMapOfUserWithValidAddressVavr().toJavaMap())
                 .hasSize(10)
                 .containsKeys("userName2", "userName8", "userName9");
+    }
+
+    @Test
+    public void should_filter_map_of_users_with_predicate_jdk8() throws Exception {
+        assertThat(this.examples.filterMapOfUserWithPredicateJdk8(NAME_END_WITH_EVEN_NUMBER))
+                .hasSize(10)
+                .containsKeys("userName2", "userName8", "userName10")
+                .doesNotContainKeys("userName9");
+    }
+
+    @Test
+    public void should_filter_map_of_users_with_predicate_vavr() throws Exception {
+        assertThat(this.examples.filterMapOfUserWithPredicateVavr(NAME_END_WITH_EVEN_NUMBER).toJavaMap())
+                .hasSize(10)
+                .containsKeys("userName2", "userName8", "userName10")
+                .doesNotContainKeys("userName9");
     }
 }

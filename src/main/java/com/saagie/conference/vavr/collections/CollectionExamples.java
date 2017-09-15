@@ -3,6 +3,7 @@ package com.saagie.conference.vavr.collections;
 
 import com.saagie.conference.vavr.domain.Address;
 import com.saagie.conference.vavr.domain.User;
+import io.vavr.Predicates;
 import io.vavr.Tuple2;
 import io.vavr.collection.List;
 import io.vavr.collection.Map;
@@ -10,6 +11,8 @@ import io.vavr.collection.Stream;
 import io.vavr.control.Try;
 
 import java.util.Collections;
+import java.util.function.Predicate;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -52,6 +55,17 @@ public class CollectionExamples {
     public List<User> filterUserWithValidAddressVavr() {
         return this.usersVavr
                 .filter(user -> Try.of(() -> user.isAddressValid()).getOrElse(false));
+    }
+
+    public java.util.List<User> filterUserWithPredicateJdk8(Predicate<User> predicate) {
+        return this.usersJdk8.stream()
+                .filter(predicate)
+                .collect(Collectors.toList());
+    }
+
+    public List<User> filterUserWithPredicateVavr(Predicate<User> predicate) {
+        return this.usersVavr
+                .filter(predicate);
     }
 
     public java.util.List<Address> filterInvalidAddressFromRouenJdk8() {
@@ -101,6 +115,18 @@ public class CollectionExamples {
         Map<String, User> userMap = this.usersToMap();
         return userMap
                 .filter(tuple -> Try.of(() -> tuple._2.isAddressValid()).getOrElse(false));
+    }
+
+    public java.util.Map<String, User> filterMapOfUserWithPredicateJdk8(Predicate<User> predicate) {
+        java.util.Map<String, User> usersMap = this.usersToMapJdk8();
+        return usersMap.entrySet().stream()
+                .filter(entry -> predicate.test(entry.getValue()))
+                .collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()));
+    }
+
+    public Map<String, User> filterMapOfUserWithPredicateVavr(Predicate<User> predicate) {
+        Map<String, User> userMap = this.usersToMap();
+        return userMap.filter(tuple -> predicate.test(tuple._2));
     }
 
 
