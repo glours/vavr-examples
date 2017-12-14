@@ -14,7 +14,7 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <!-- Libs -->
-    <lib.vavr.version>0.9.0</lib.vavr.version>
+    <lib.vavr.version>0.9.2</lib.vavr.version>
     <!-- Tests -->
     <test.junit.version>4.12</test.junit.version>
     <test.assertj-core.version>3.4.1</test.assertj-core.version>
